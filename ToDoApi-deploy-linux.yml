@@ -1,0 +1,29 @@
+apiVersion: apps/v1beta1
+kind: Deployment
+metadata:
+  name: todoapisamplelinux
+spec:
+  replicas: 3
+  template:
+    metadata:
+      labels:
+        app: todoapi-kub-app-linux
+    spec:
+      containers:
+        - name: todoapi-kub-app-linux
+          image: todoapi.azurecr.io/todoapilinux1:v1
+          ports:
+            - containerPort: 80
+---
+apiVersion: v1
+kind: Service
+metadata:
+    name: todoapi-kub-app-linux
+spec:
+  ports:
+    - name: http-port
+      port: 80
+      targetPort: 80
+  selector:
+    app: todoapi-kub-app-linux
+  type: LoadBalancer

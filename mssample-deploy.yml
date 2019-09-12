@@ -1,0 +1,29 @@
+apiVersion: apps/v1beta1
+kind: Deployment
+metadata:
+  name: mssamplesbook
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: ToDoAPI-kub-app
+    spec:
+      containers:
+        - name: ToDoAPI-Service-app
+          image: todoapi.azurecr.io/todoapi:v1
+          ports:
+            - containerPort: 80
+---
+apiVersion: v1
+kind: Service
+metadata:
+    name: ToDoAPI-kub-app
+spec:
+  ports:
+    - name: http-port
+      port: 80
+      targetPort: 80
+  selector:
+    app: ToDoAPI-kub-app
+  type: LoadBalancer
