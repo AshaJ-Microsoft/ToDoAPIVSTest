@@ -1,0 +1,16 @@
+apiVersion : apps/v1beta1
+kind: Deployment
+metadata:
+  name: ashajmicrosofttodoapivstest 
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: ashajmicrosofttodoapivstest 
+    spec:
+      containers:
+        - name: ashajmicrosofttodoapivstest 
+          image: todoapi.azurecr.io/ashajmicrosofttodoapivstest
+          ports:
+          - containerPort: 80
